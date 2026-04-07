@@ -1,5 +1,12 @@
-{% assign is_zh = page.lang == "zh" %}
-{% assign is_vi = page.lang == "vi" %}
+{% assign pricing_path = page.permalink | default: page.url | default: page.path | default: '' | downcase %}
+{% assign pricing_locale = page.pricing_lang | default: page.lang | default: '' | downcase %}
+{% assign is_zh = false %}
+{% assign is_vi = false %}
+{% if pricing_path contains '/cn/' or pricing_locale == 'zh' or pricing_locale == 'cn' %}
+  {% assign is_zh = true %}
+{% elsif pricing_path contains '/vi/' or pricing_locale == 'vi' %}
+  {% assign is_vi = true %}
+{% endif %}
 <section class="section data-grid-section">
   <div class="container">
     <div class="section-head premium-section-head">
